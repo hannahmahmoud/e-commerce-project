@@ -28,7 +28,7 @@ let reviewSchema= new mongoose.Schema({
     timestamps:true,
 });
 
-reviewSchema.pre(/^find/,function(next){
+reviewSchema.pre(/^find/,function(){
     this.
     // populate({
     //     path:'product',
@@ -41,7 +41,7 @@ reviewSchema.pre(/^find/,function(next){
        path:'product',
        select:"title" 
     })
-    next();
+    //next();
 })
 
 let reviewModel = mongoose.model('review',reviewSchema);

@@ -12,7 +12,7 @@ let authRouter= express.Router();
 // authRouter.use('/protected/servics/categories',categoryRoute);
 // authRouter.use('/protected/servics/subCategories',subCategoryRoute);
 // authRouter.use('/protected/servics/brands',brandRoute);
-
+//authValidator.signup,
 
 authRouter.route('/signup').post(authValidator.signup,authController.singup);
 authRouter.route('/login').post(authValidator.login,authController.login);

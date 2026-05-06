@@ -8,7 +8,8 @@ let categorySchema= new mongoose.Schema({
         required: true,
         unique:true
     }, 
-    photo: {type: String,
+    photo: {
+        type: String,
         // required: true,
     },
     slug:{

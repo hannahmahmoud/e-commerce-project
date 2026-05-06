@@ -7,7 +7,7 @@ dotenv.config({path:'config.env'});
 
 
 //connecting the db
-mongoose.connect("mongodb://localhost:27017/E-commerenceDatebase",{useNewUrlParser: true, useUnifiedTopology: true}
+mongoose.connect("mongodb://localhost:27017/E-commerenceDatebase"
 ).then ((connection)=>{
    //console.log(connection);
    console.log("Successful connection to mongoDB")

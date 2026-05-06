@@ -81,7 +81,7 @@ productSchema.virtual('reviews',{
     localField:'_id'
     });
     
-productSchema.pre(/^find/,function(next){
+productSchema.pre(/^find/,function(){
     this.populate({
         path:'category',
         select:'name'
@@ -92,7 +92,7 @@ productSchema.pre(/^find/,function(next){
         path:'subCategory',
         select:'name'
     })
-    next();
+   // next();
 
 })
 

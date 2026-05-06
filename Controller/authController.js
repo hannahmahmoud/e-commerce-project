@@ -6,9 +6,8 @@ let jwt = require('jsonwebtoken');
 let util= require('util');
 let sendEmail= require('./../Utlis/Email');
 let crypto= require('crypto');
-
-
 let app =express();
+
 //using this middleware to access the request body
  app.use(express.json());
 
@@ -27,7 +26,7 @@ let app =express();
 
  exports.login= asynchandlerfunc(async(request,response, next)=>{
    //check if email and passsword exits in db
-   let foundUser= await userModel.findOne({email:request.body.email}).select('password');
+   let foundUser= await userModel.findOne({email:request.body.email}).select('+password');
    if (!foundUser){
       let error= new customError('incorrect email!');
       return next(error);

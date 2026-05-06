@@ -5,6 +5,7 @@ let categoryModel= require('./../Model/category');
 let apiFeatures= require('./../Utlis/apiFeatures')
 let multer= require('multer');
 let path = require('path');
+const fs = require('fs');
 const customError = require('../Utlis/customError');
 let sharp= require('sharp');
 //1- storing images in diskStorage bs hena mafesh buffer
@@ -48,18 +49,35 @@ let upload= multer({
 
 //using mdiddleware to read the request body
 app.use(express.json())
-exports.resize=  asyncErrorHandler(async  function(request, file, next)
-{let extension= request.file.mimetype.split('/')[1];
-    let filename='category'+'-'+Date.now()+'.'+extension;
-await sharp(request.file.buffer)
-.resize(600,600)
-.toFormat("jpeg")
-.jpeg({quality: 95})
-.toFile('uploads/category/'+filename)
-request.body.photo=filename;
-next();
 
-})
+exports.resize = asyncErrorHandler(async function(request, response, next) {
+    // 1. If no image was uploaded, just move to the next step
+    if (!request.file) {
+        return next();
+    }
+
+    // 2. Set the filename and where to save it
+    let filename = 'category' + '-' + Date.now() + '.jpeg';
+    let outputPath = 'uploads/category/';
+
+    // 3. Automatically create the folder if it does not exist
+    if (!fs.existsSync(outputPath)) {
+        fs.mkdirSync(outputPath, { recursive: true });
+    }
+
+    // 4. Resize and save the image using Sharp
+    await sharp(request.file.buffer)
+        .resize(600, 600)
+        .toFormat("jpeg")
+        .jpeg({ quality: 95 })
+        .toFile(outputPath + filename);
+
+    // 5. Save the filename to the request body so it goes into the database
+    request.body.photo = filename;
+    
+    // 6. Move to the next middleware (createNewCategory)
+    next();
+});
 
 exports.uploadImage=  upload.single('photo'),
 

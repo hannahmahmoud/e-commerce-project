@@ -8,8 +8,9 @@
  
  let app= express();
  //using this middle ware to access the request body
-  app.use(express.json())
+app.use(express.json())
  
+
  
  exports.signup=[
      check('name')

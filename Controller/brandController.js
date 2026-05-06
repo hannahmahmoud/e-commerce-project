@@ -11,19 +11,34 @@ const customError = require('../Utlis/customError');
 
 
 
-exports.resize= asyncErrorHandler(async function(request, file, next){
-   let extension= request.file.mimetype.split('/')[1];
-    let fileName='brand-'+ Date.now()+'.'+extension;
-    await sharp(request.file.buffer)
-    .resize(600,600)
-    .toFormat('jpeg')
-    .toFile('uploads/brand/'+fileName);
+const fs = require('fs');
+
+exports.resize = asyncErrorHandler(async function(request, response, next) {
+    // 1. Guard clause: Skip if no file was uploaded
+    if (!request.file) return next();
+
+    // 2. Define the exact path
+    const uploadPath = 'uploads/brand/';
+
+    // 3. Automatically create the directory if it doesn't exist
+    if (!fs.existsSync(uploadPath)) {
+        fs.mkdirSync(uploadPath, { recursive: true });
+    }
+
+    // 4. Set the filename
+    let extension = request.file.mimetype.split('/')[1];
+    let fileName = 'brand-' + Date.now() + '.' + extension;
     
-    request.body.photo=fileName;
-     next();
-
-
-})
+    // 5. Resize and save
+    await sharp(request.file.buffer)
+        .resize(600, 600)
+        .toFormat('jpeg')
+        .toFile(uploadPath + fileName);
+    
+    // 6. Attach to body and continue
+    request.body.photo = fileName;
+    next();
+});
 let app= express();
 
 
