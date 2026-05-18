@@ -1,0 +1,108 @@
+.navbar {
+  background: #0A1635;
+  border-bottom: 1px solid var(--border);
+  height: 60px;
+  display:flex;
+  align-items: center;
+  padding: 0 28px;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+
+.navbar__logo {
+  font-family:monospace;
+  font-weight: bold;
+  font-size: 20px;
+  color: #65CC2E;
+  cursor: pointer;
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  padding: 0;
+}
+.navbar__logo span { color:#65CC2E }
+
+.navbar__links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  flex: 1;
+}
+
+.navbar__btn {
+  padding: 7px 14px;
+  background: none;
+  border: none;
+  color: white;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  position: relative;
+  transition: all 0.15s;
+}
+.navbar__btn:hover { background:#4a1e91; color: white; }
+.navbar__btn.active { background: transparent; color: white; font-weight: 600; }
+.navbar__btn.active:hover{ background: #4a1e91;}
+.navbar__badge {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 5px;
+  min-width: 16px;
+  text-align: center;
+}
+
+.navbar__right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.navbar__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: blue;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.navbar__user-label { font-size: 13px; color: white; }
+
+.navbar__logout {
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  background: none;
+  color: white;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  transition: all 0.15s;
+}
+.navbar__logout:hover { border-color: var(--accent); color: var(--accent); }
+
+.navbar__login {
+  padding: 7px 16px;
+  background:transparent;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.15s;
+} 
+.navbar__login:hover { background: #4a1e91 }
